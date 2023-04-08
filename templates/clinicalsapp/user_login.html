@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+   <title>Patient Clinical Data Management System </title>
+   <link rel="stylesheet" href="{%static 'css/loginstyle.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+   </head>
+<body>
+  <div id="heading">Patient Clinical Data Management System</div>     
+  <div class="main_div">
+    <form method="post">
+      {% csrf_token %}
+    <div class="title">Login Form</div>
+      <div class="input_box">
+        <label for='username'></label>
+        <input type="text" name='username' id='username' placeholder="user name" required>
+        <div class="icon"><i class="fas fa-user"></i></div>
+      </div>
+      <div class="input_box">
+        <label for='password'></label>
+        <input type="password" name='password' id='password' placeholder="Password" required>
+        <div class="icon"><i class="fas fa-lock"></i></div>
+      </div>
+      <div class="input_box button">
+        <input type="submit" value="Login">
+      </div>
+        </form>
+        <p>{{error}}
+  </div> 
+  
+</body>
+</html>

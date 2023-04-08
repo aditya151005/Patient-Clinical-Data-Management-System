@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient List</title>
+    <link rel="stylesheet" href="{%static 'css/patientliststyle.css'%}"> 
+</head>
+<body>
+    <div id="nav">
+        <div class="heading">Patients:</div>
+    <div class="links">
+        <a href="/clinicalsapp/create/">Add Patient</a>
+        <a href="/clinicalsapp/logout">Logout</a>   
+    </div>
+    </div>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+        </thead>
+        {%for patient in patient_list%}
+        <tr>
+            <td>{{patient.id}}</td>
+            <td>{{patient.firstName}}</td>
+            <td>{{patient.lastName}}</td>
+            <td>{{patient.age}}</td>
+            <td><a href="/clinicalsapp/update/{{patient.id}}">Update</a></td>
+            <td><a href="/clinicalsapp/delete/{{patient.id}}/">Delete</a></td>
+            <td><a href="/clinicalsapp/addData/{{patient.id}}/">Add Data</a></td>
+            <td><a href="/clinicalsapp/analyze/{{patient.id}}/">Analyze Data</a></td>
+            <!-- <td><a href="/update/{{patient.id}}">Update</a></td>
+            <td><a href="/delete/{{patient.id}}">Delete</a></td>
+            <td><a href="/addData/{{patient.id}}">Add Data</a></td>
+            <td><a href="/analyze/{{patient.id}}">Analyze Data</a></td>
+        </tr> -->
+        {%endfor%}
+    </table>  
+    <br/>
+</body>
+</html>
