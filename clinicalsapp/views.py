@@ -35,7 +35,7 @@ class PatientDeleteView(DeleteView):
     model=Patient
     success_url=reverse_lazy('index') 
 #Adding clinical data
-#Restrict access to the unauthenticated users 
+#Restrict access to the unauthenticated users  
 @login_required(login_url='/clinicalsapp/login/')
 def addData(request,**kwargs):
     form=ClinicalDataForm()  
