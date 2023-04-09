@@ -5,26 +5,38 @@ from django.shortcuts import render,redirect
 from clinicalsapp.models import ClinicalData,Patient
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 #import different types of view
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 #importing clinicalDataForm
 from clinicalsapp.forms import ClinicalDataForm
 # Create your views here.
+#Restrict access to the unauthenticated users 
+@method_decorator(login_required(login_url='/clinicalsapp/login/'), name='dispatch')
 class PatientListView(ListView):
     model=Patient
+#Restrict access to the unauthenticated users 
+@method_decorator(login_required(login_url='/clinicalsapp/login/'), name='dispatch')    
 class PatientCreateView(CreateView):
     model=Patient
     success_url=reverse_lazy('index')
     fields=('firstName','lastName','age')
+#Restrict access to the unauthenticated users 
+@method_decorator(login_required(login_url='/clinicalsapp/login/'), name='dispatch')
 class PatientUpdateView(UpdateView):
     model=Patient
     success_url=reverse_lazy('index')
     fields=('firstName','lastName','age')
+#Restrict access to the unauthenticated users 
+@method_decorator(login_required(login_url='/clinicalsapp/login/'), name='dispatch')
 class PatientDeleteView(DeleteView):
     model=Patient
     success_url=reverse_lazy('index') 
 #Adding clinical data
+#Restrict access to the unauthenticated users 
+@login_required(login_url='/clinicalsapp/login/')
 def addData(request,**kwargs):
     form=ClinicalDataForm()  
     patient=Patient.objects.get(id=kwargs['pk'])
@@ -36,6 +48,8 @@ def addData(request,**kwargs):
     return render(request,'clinicalsapp/clinicaldata_form.html',{'form':form,'patient':patient})
 
 #Analyzing clinical data
+#Restrict access to the unauthenticated users 
+@login_required(login_url='/clinicalsapp/login/')
 def analyze(request,**kwargs):
     data=ClinicalData.objects.filter(patient_id=kwargs['pk'])
     patient=Patient.objects.get(id=kwargs['pk'])
